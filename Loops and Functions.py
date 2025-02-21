@@ -1,4 +1,9 @@
 
+def filter_out(x,y):
+    if y in x:
+         x= x.replace(y,"")
+    return float(x)
+
 Months = []
 Monthly_statement= {}
 Reentry = ""
@@ -10,46 +15,31 @@ while Reentry == "y" or "Y":
     if Month_dict:
         print(f"Found existing entry for {Month}")
         Additional_salary = input("Enter this month's additional salary in $: ")
-        if "$" in Additional_salary:
-            Additional_salary = float(Additional_salary.replace("$", ""))
-        else:
-            Additional_salary = float(Additional_salary)
+        Additional_salary= filter_out(Additional_salary,"$")
         Month_dict["Salary"] += Additional_salary
 
     else:
         #Salary 
         Salary = input("Enter this month's salary in $: ")
-        if "$" in Salary:
-            Salary = float(Salary.replace("$", ""))
-        else:
-            Salary = float(Salary)
+        Salary= filter_out(Salary,"$")
         Monthly_statement["Salary"] = Salary
 
         #Savings
         Savings_percentage = input("Enter percentage dedicated to savings: ")
-        if "%" in Savings_percentage:
-            Savings_percentage = float(Savings_percentage.replace("%", ""))
-        else:
-            Savings_percentage = float(Savings_percentage)
+        Savings_percentage= filter_out(Savings_percentage,"%")
         Savings_amount = Salary * (Savings_percentage/100)
         Monthly_statement["Savings"] = Savings_amount
 
         #Rent
         Rent_percentage = input("Enter percentage dedicated to rent: ")
-        if "%" in Rent_percentage:
-            Rent_percentage = float(Rent_percentage.replace("%", ""))
-        else :
-            Rent_percentage = float(Rent_percentage)
+        Rent_percentage= filter_out(Rent_percentage,"%")
         Rent_amount = Salary * (Rent_percentage/100)
         Monthly_statement["Rent"] = Rent_amount
         Monthly_statement["Annual Rent"] = Rent_amount * 12
 
         # Electricity
         Electricity_percentage = input("Enter percentage dedicated to Electricity: ")
-        if "%" in Electricity_percentage:
-            Electricity_percentage = float(Electricity_percentage.replace("%", ""))
-        else :
-            Electricity_percentage = float(Electricity_percentage)
+        Electricity_percentage= filter_out(Electricity_percentage,"%")
         Electricity_amount = Salary * (Electricity_percentage/100)
         Monthly_statement["Electricity"] = Electricity_amount
         Monthly_statement["Annual Eelectricity"] = Electricity_amount * 12
@@ -74,3 +64,9 @@ while Reentry == "y" or "Y":
                 else:
                     print(f"{key} -------------- ${value:.2f}")
     Reentry = input("Would you like to add another entry(y for yes and n for no)? ")                       
+
+def filter_out(x,y):
+    if y in x:
+        x=float(x.replace(y,""))
+    else:
+        x=float(x)
